@@ -1,0 +1,12 @@
+name: ${project.name}
+version: ${project.version}
+description: ${project.description}
+author: ${project.author}
+api-version: '1.18'
+main: com.gmail.willramanand.RamPacks.RamPacks
+depend:
+softdepend: [Vault]
+commands:
+  backpack:
+    description: Base command for RamPacks.
+permissions:

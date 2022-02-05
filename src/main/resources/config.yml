@@ -1,0 +1,6 @@
+prices:
+  small: 100
+  medium: 1000
+  large: 10000
+  x-large: 100000
+  gigantic: 1000000
