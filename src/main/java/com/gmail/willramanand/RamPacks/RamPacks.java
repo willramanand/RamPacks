@@ -2,6 +2,7 @@ package com.gmail.willramanand.RamPacks;
 
 import co.aikar.commands.PaperCommandManager;
 import com.gmail.willramanand.RamPacks.commands.BackpackCommand;
+import com.gmail.willramanand.RamPacks.config.PriceManager;
 import com.gmail.willramanand.RamPacks.listeners.GUIListener;
 import com.gmail.willramanand.RamPacks.listeners.PlayerListener;
 import com.gmail.willramanand.RamPacks.player.PlayerConfiguration;
@@ -49,6 +50,8 @@ public class RamPacks extends JavaPlugin {
         playerConfiguration = new PlayerConfiguration(this);
 
         playerManager.startAutoSave();
+
+        PriceManager.loadPrices();
 
         registerCommands();
         registerEvents();

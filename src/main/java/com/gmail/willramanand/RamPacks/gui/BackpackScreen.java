@@ -1,7 +1,7 @@
 package com.gmail.willramanand.RamPacks.gui;
 
 import com.gmail.willramanand.RamPacks.RamPacks;
-import com.gmail.willramanand.RamPacks.Size;
+import com.gmail.willramanand.RamPacks.config.Size;
 import com.gmail.willramanand.RamPacks.player.PackPlayer;
 import com.gmail.willramanand.RamPacks.utils.ColorUtils;
 import net.kyori.adventure.text.Component;

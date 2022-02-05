@@ -1,7 +1,7 @@
 package com.gmail.willramanand.RamPacks.gui;
 
 import com.gmail.willramanand.RamPacks.RamPacks;
-import com.gmail.willramanand.RamPacks.Size;
+import com.gmail.willramanand.RamPacks.config.Size;
 import com.gmail.willramanand.RamPacks.gui.items.InventoryItem;
 import com.gmail.willramanand.RamPacks.utils.ColorUtils;
 import net.kyori.adventure.text.Component;
@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class BuyScreen implements InventoryHolder {

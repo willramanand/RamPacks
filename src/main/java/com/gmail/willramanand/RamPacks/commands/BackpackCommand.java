@@ -2,12 +2,9 @@ package com.gmail.willramanand.RamPacks.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.Default;
-import co.aikar.commands.annotation.Description;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.*;
 import com.gmail.willramanand.RamPacks.RamPacks;
-import com.gmail.willramanand.RamPacks.Size;
+import com.gmail.willramanand.RamPacks.config.Size;
 import com.gmail.willramanand.RamPacks.gui.BackpackScreen;
 import com.gmail.willramanand.RamPacks.gui.BuyScreen;
 import com.gmail.willramanand.RamPacks.player.PackPlayer;

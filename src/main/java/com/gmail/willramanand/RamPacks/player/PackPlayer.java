@@ -1,7 +1,7 @@
 package com.gmail.willramanand.RamPacks.player;
 
 import com.gmail.willramanand.RamPacks.RamPacks;
-import com.gmail.willramanand.RamPacks.Size;
+import com.gmail.willramanand.RamPacks.config.Size;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

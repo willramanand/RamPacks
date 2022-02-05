@@ -1,10 +1,9 @@
 package com.gmail.willramanand.RamPacks.player;
 
 import com.gmail.willramanand.RamPacks.RamPacks;
-import com.gmail.willramanand.RamPacks.Size;
+import com.gmail.willramanand.RamPacks.config.Size;
 import com.gmail.willramanand.RamPacks.utils.ColorUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -77,7 +76,8 @@ public class PlayerConfiguration {
 
             for (Size sizes : Size.values()) {
                 if (sizes == Size.NONE) continue;
-                packPlayer.setBought(size, config.getBoolean("bought." + sizes.name().toLowerCase()));
+                boolean isBought = config.getBoolean("bought." + sizes.name().toLowerCase());
+                packPlayer.setBought(sizes, isBought);
             }
 
             plugin.getPlayerManager().addPlayerData(packPlayer);

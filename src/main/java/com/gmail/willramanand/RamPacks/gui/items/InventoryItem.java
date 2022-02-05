@@ -1,16 +1,17 @@
 package com.gmail.willramanand.RamPacks.gui.items;
 
 import com.gmail.willramanand.RamPacks.RamPacks;
-import com.gmail.willramanand.RamPacks.Size;
+import com.gmail.willramanand.RamPacks.config.PriceManager;
+import com.gmail.willramanand.RamPacks.config.Size;
 import com.gmail.willramanand.RamPacks.player.PackPlayer;
 import com.gmail.willramanand.RamPacks.utils.ColorUtils;
+import com.gmail.willramanand.RamPacks.utils.Formatter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -20,7 +21,6 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class InventoryItem {
 
@@ -71,15 +71,20 @@ public class InventoryItem {
 
         List<Component> lore = new ArrayList<>();
         lore.add(Component.empty());
+
         lore.add(Component.text(ColorUtils.colorMessage("&r&6Price:")));
         if (isBought) {
             lore.add(Component.text(ColorUtils.colorMessage("&r&aBought")));
             meta.getPersistentDataContainer().set(new NamespacedKey(RamPacks.getInstance(), "bought"), PersistentDataType.INTEGER, 1);
         } else {
-            lore.add(Component.text(ColorUtils.colorMessage("&r&c$" + size.getPrice())));
-            meta.getPersistentDataContainer().set(new NamespacedKey(RamPacks.getInstance(), "price"), PersistentDataType.INTEGER, size.getPrice());
+            lore.add(Component.text(ColorUtils.colorMessage("&r&c" + Formatter.formatMoney(PriceManager.getPrice(size)))));
+            meta.getPersistentDataContainer().set(new NamespacedKey(RamPacks.getInstance(), "price"), PersistentDataType.DOUBLE, PriceManager.getPrice(size));
         }
         meta.getPersistentDataContainer().set(new NamespacedKey(RamPacks.getInstance(), "size"), PersistentDataType.STRING, size.name().toLowerCase());
+
+        lore.add(Component.empty());
+        lore.add(Component.text(ColorUtils.colorMessage("&r&6Slots: &f" + size.getSlot())));
+
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.lore(lore);
         item.setItemMeta(meta);
