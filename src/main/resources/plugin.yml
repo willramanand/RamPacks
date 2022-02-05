@@ -10,3 +10,5 @@ commands:
   backpack:
     description: Base command for RamPacks.
 permissions:
+  backpack.admin:
+    default: op

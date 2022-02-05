@@ -5,7 +5,6 @@ import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import com.gmail.willramanand.RamPacks.RamPacks;
 import com.gmail.willramanand.RamPacks.config.Size;
-import com.gmail.willramanand.RamPacks.gui.BackpackScreen;
 import com.gmail.willramanand.RamPacks.gui.BuyScreen;
 import com.gmail.willramanand.RamPacks.player.PackPlayer;
 import com.gmail.willramanand.RamPacks.utils.ColorUtils;
@@ -30,8 +29,7 @@ public class BackpackCommand extends BaseCommand {
             player.sendMessage(ColorUtils.colorMessage("&cYou do not have a backpack! Use &d/bp buy&c."));
             return;
         }
-        BackpackScreen backpackScreen = new BackpackScreen(plugin, player);
-        player.openInventory(backpackScreen.getInventory());
+        player.openInventory(packPlayer.getInventory());
     }
 
     @Subcommand("buy")
@@ -39,6 +37,22 @@ public class BackpackCommand extends BaseCommand {
     public void buyBackpack(Player player) {
         BuyScreen buyScreen = new BuyScreen(plugin, player);
         player.openInventory(buyScreen.getInventory());
+    }
+
+    @Subcommand("admin")
+    @CommandPermission("backpack.admin")
+    @CommandCompletion("@players")
+    @Description("Admin command for viewing other players backpacks.")
+    public void adminBackpack(CommandSender sender, @Flags("other") Player player) {
+        PackPlayer packPlayer = plugin.getPlayerManager().getPlayerData(player);
+
+        if (packPlayer.size() == Size.NONE) {
+            sender.sendMessage(ColorUtils.colorMessage("&cThis user does not have a backpack!"));
+            return;
+        }
+
+        Player admin = (Player) sender;
+        admin.openInventory(packPlayer.getInventory());
     }
 
     @Subcommand("version|v")

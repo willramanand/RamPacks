@@ -3,7 +3,6 @@ package com.gmail.willramanand.RamPacks.listeners;
 import com.gmail.willramanand.RamPacks.RamPacks;
 import com.gmail.willramanand.RamPacks.config.PriceManager;
 import com.gmail.willramanand.RamPacks.config.Size;
-import com.gmail.willramanand.RamPacks.gui.BackpackScreen;
 import com.gmail.willramanand.RamPacks.gui.BuyScreen;
 import com.gmail.willramanand.RamPacks.gui.items.InventoryItem;
 import com.gmail.willramanand.RamPacks.player.PackPlayer;
@@ -14,9 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 public class GUIListener implements Listener {
@@ -25,21 +22,6 @@ public class GUIListener implements Listener {
 
     public GUIListener(RamPacks plugin) {
         this.plugin = plugin;
-    }
-
-    @EventHandler
-    public void saveBackpack(InventoryCloseEvent event) {
-        if (event.getInventory() == null) return;
-        if (event.getInventory().getHolder() instanceof BackpackScreen) {
-            Player player = (Player) event.getPlayer();
-            PackPlayer packPlayer = plugin.getPlayerManager().getPlayerData(player);
-
-            int i = 0;
-            for (ItemStack item : event.getInventory().getContents()) {
-                packPlayer.setItem(i, item);
-                i++;
-            }
-        }
     }
 
     @EventHandler
