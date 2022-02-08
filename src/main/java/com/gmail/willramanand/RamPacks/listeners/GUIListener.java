@@ -36,26 +36,28 @@ public class GUIListener implements Listener {
             if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "bought")));
             if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "price"))) {
                 double price = e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, "price"), PersistentDataType.DOUBLE);
-                if (!(RamPacks.getEconomy().hasAccount(player)) || !(RamPacks.getEconomy().has(player, price))) {
+                if (RamPacks.getEconomy().hasAccount(player) && (RamPacks.getEconomy().getBalance(player) - price) >= 0) {
+                    Size size = Size.matchSize(e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, "size"), PersistentDataType.STRING));
+                    RamPacks.getEconomy().withdrawPlayer(player, price);
+
+                    player.sendMessage(ColorUtils.colorMessage("&eYou bought the &d" + size.getName() + " &efor &d" + Formatter.formatMoney(PriceManager.getPrice(size))));
+
+                    packPlayer.setBought(size, true);
+                    packPlayer.size(size);
+
+                    Inventory inv = e.getClickedInventory();
+                    int k = 2;
+                    for (Size sizes : Size.values()) {
+                        if (sizes == Size.NONE) continue;
+                        inv.setItem(k, InventoryItem.getBackpackItem(player, sizes));
+                        k++;
+                    }
+                    inv.setItem(0, InventoryItem.getHead(player));
+                } else {
                     player.sendMessage(ColorUtils.colorMessage("&4You do not have enough currency to buy that!"));
                     return;
                 }
-                Size size = Size.matchSize(e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, "size"), PersistentDataType.STRING));
-                RamPacks.getEconomy().withdrawPlayer(player, price);
 
-                player.sendMessage(ColorUtils.colorMessage("&eYou bought the &d" + size.getName() + " &efor &d" + Formatter.formatMoney(PriceManager.getPrice(size))));
-
-                packPlayer.setBought(size, true);
-                packPlayer.size(size);
-
-                Inventory inv = e.getClickedInventory();
-                int k = 2;
-                for (Size sizes : Size.values()) {
-                    if (sizes == Size.NONE) continue;
-                    inv.setItem(k, InventoryItem.getBackpackItem(player, sizes));
-                    k++;
-                }
-                inv.setItem(0, InventoryItem.getHead(player));
             } else if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "close_button"))) {
                 player.closeInventory();
             }
