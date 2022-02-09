@@ -36,7 +36,7 @@ public class GUIListener implements Listener {
             if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "bought")));
             if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "price"))) {
                 double price = e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, "price"), PersistentDataType.DOUBLE);
-                if (RamPacks.getEconomy().hasAccount(player) && (RamPacks.getEconomy().getBalance(player) - price) >= 0) {
+                if (RamPacks.getEconomy().hasAccount(player) && (RamPacks.getEconomy().has(player, price))) {
                     Size size = Size.matchSize(e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, "size"), PersistentDataType.STRING));
                     RamPacks.getEconomy().withdrawPlayer(player, price);
 
