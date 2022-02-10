@@ -54,6 +54,9 @@ public class InventoryItem {
 
         List<Component> lore = new ArrayList<>();
         lore.add(Component.empty());
+        lore.add(Component.text(ColorUtils.colorMessage("&6Balance:")));
+        lore.add(Component.text(ColorUtils.colorMessage("&3" + RamPacks.getEconomy().format(RamPacks.getEconomy().getBalance(player)))));
+        lore.add(Component.empty());
         lore.add(Component.text(ColorUtils.colorMessage("&6Owned Backpack:")));
         lore.add(Component.text(ColorUtils.colorMessage("&3" + packPlayer.size().getName())));
         skull.lore(lore);
