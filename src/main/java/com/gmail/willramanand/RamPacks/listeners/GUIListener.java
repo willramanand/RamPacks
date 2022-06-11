@@ -33,11 +33,12 @@ public class GUIListener implements Listener {
 
             e.setCancelled(true);
             if (e.getCurrentItem() == null) return;
-            if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "bought")));
+            if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "bought"))) return;
             if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "price"))) {
                 double price = e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, "price"), PersistentDataType.DOUBLE);
                 if (RamPacks.getEconomy().hasAccount(player) && (RamPacks.getEconomy().has(player, price))) {
                     Size size = Size.matchSize(e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, "size"), PersistentDataType.STRING));
+                    player.sendMessage(size.name().toLowerCase());
                     RamPacks.getEconomy().withdrawPlayer(player, price);
 
                     player.sendMessage(ColorUtils.colorMessage("&eYou bought the &d" + size.getName() + " &efor &d" + Formatter.formatMoney(PriceManager.getPrice(size))));
@@ -55,7 +56,6 @@ public class GUIListener implements Listener {
                     inv.setItem(0, InventoryItem.getHead(player));
                 } else {
                     player.sendMessage(ColorUtils.colorMessage("&4You do not have enough currency to buy that!"));
-                    return;
                 }
 
             } else if (e.getCurrentItem().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "close_button"))) {

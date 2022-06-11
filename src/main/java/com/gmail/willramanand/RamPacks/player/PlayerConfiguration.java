@@ -99,7 +99,6 @@ public class PlayerConfiguration {
         if (file.exists()) {
             FileConfiguration config = YamlConfiguration.loadConfiguration(file);
             try {
-                if (packPlayer.size() == Size.NONE) return;
                 config.set("size", packPlayer.size().name());
 
                 config.set("items", null);
